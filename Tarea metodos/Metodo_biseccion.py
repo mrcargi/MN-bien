@@ -6,11 +6,11 @@ from sympy import Function
 
 
 x= sp.Symbol('x')
-exp = Function('exp')
+
 
 fx_str = input("Ingresa la formula:")  #x**3-6*x**2+9*x-3.75
 try: 
-    fx = sp.sympify(fx_str, locals= {'exp': sp.exp})
+    fx = sp.sympify(fx_str)
 except sp.SympifyError:
     print("invalido")
     exit(1)

@@ -1,17 +1,24 @@
 #APLICACION DEL METODO DE FALSA POSICION
-
-
 import sympy as sp
+from sympy import Function
 
 from prettytable  import PrettyTable
 
-
 x= sp.Symbol('x')
-fx =(sp.exp(x)) + (2**(-1*(x))) + 2 * sp.cos(x) - 6
-print(fx)        #Imprimo la funcion
 
 
 
+fx_str = input("Ingresa la formula:")  #(exp(x)) + (2**(-1*(x))) + 2 * cos(x) - 6
+try: 
+    fx = sp.sympify(fx_str)
+except sp.SympifyError:
+    print("invalido")
+    exit(1)
+
+
+
+                                                       
+      
 
 
 

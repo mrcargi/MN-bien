@@ -8,11 +8,11 @@ x= sp.Symbol('x')
 
 
 
-fx_str = input("Ingresa la formula:")  #(exp(x)) + (2**(-1*(x))) + 2 * cos(x) - 6
+fx_str = input("\n Ingrese la ecuación que desee resolver: ")  #(exp(x)) + (2*(-1(x))) + 2 * cos(x) - 6
 try: 
     fx = sp.sympify(fx_str)
 except sp.SympifyError:
-    print("invalido")
+    print("Inválido")
     exit(1)
 
 
@@ -22,14 +22,15 @@ except sp.SympifyError:
 
 
 
-def falsa_posicion(a,b,error = 0.000001,max_iter= 100):
+def falsa_posicion(a,b,error = 0.00001,max_iter= 100):
     if fx.subs(x,a).evalf() == 0:
-        return a 
+        return f"La raíz buscada es el valor de a= {a}"
     elif fx.subs(x,b) == 0:
-        return b
+        return f"La raíz buscada es el valor de b= {b}"
     
     
     if fx.subs(x,a).evalf()*fx.subs(x,b).evalf() > 0:
+        print("\nLa raíz NO se encuentra en el intervalo ingresado")
         return None
     tabla = PrettyTable()
     tabla.field_names = ["#Iteracion", "a", "b", "m", "f(a)", "f(b)", "f(m)", "Error%"]
@@ -54,13 +55,12 @@ def falsa_posicion(a,b,error = 0.000001,max_iter= 100):
             a = m
         
             
-
-    print("Numero maximo de Iteraciones alcanzado")
+    print()
+    print(f"La raíz encontrada con un error menor a 0.01% es: {m}")
+    print()
     print(tabla)
 
 
 
 
-raiz = falsa_posicion(float(input("Ingrese el intervalo a: ")),float(input("ingrese el intervalo b : ")))
-
-
+raiz = falsa_posicion(float(input("\n Ingrese el intervalo a: ")),float(input("\n ingrese el intervalo b: ")))

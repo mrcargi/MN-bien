@@ -8,35 +8,35 @@ from sympy import Function
 x= sp.Symbol('x')
 
 
-fx_str = input("Ingresa la formula:")  #x**3-6*x**2+9*x-3.75
+fx_str = input("Ingrese la ecuación que desee resolver: ")  #x*3-6*x*2+9*x-3.75
 try: 
     fx = sp.sympify(fx_str)
 except sp.SympifyError:
-    print("invalido")
+    print("Inválido")
     exit(1)
 
 
-print(fx)        #Imprimo la funcion
 
-
-a = float(input("Define el intervalo a : "))
-b = float(input("Define el intervalo b : "))
+a = float(input("\nDefina el intervalo a: "))
+b = float(input("\nDefina el intervalo b: "))
 
 
 
 def biseccion(a,b,error = 0.0001,max_iter= 100):
-    if fx.subs(x,a) == 0:
-        return a 
-    elif fx.subs(x,b) == 0:
-        return b
+    if abs(fx.subs(x,a)) == 0:
+        return f"La raíz buscada es el valor de a= {a}"
+    elif abs(fx.subs(x,b)) == 0:
+        return f"La raíz buscada es el valor de b= {b}"
     
     
     if fx.subs(x,a)*fx.subs(x,b) > 0:
+        print("\nLa raíz NO se encuentra en el intervalo ingresado")
         return None
+        
     m_previo = None
     tabla = PrettyTable()
     tabla.field_names=["#Iteracion","a","b","m","f(a)","f(b)","f(m)","Error%"]
-    tabla.title = f"METODO DE BISECCION Para la funcion : {fx} "
+    tabla.title = f"Método de Bisección para la función : {fx} "
     m = (a+b)/2 
     
     
@@ -44,10 +44,10 @@ def biseccion(a,b,error = 0.0001,max_iter= 100):
         m_previo = m
         m = (a+b)/2 
         errorc = abs(((m) - m_previo)/m) *100
-        tabla.add_row([i+1,a,b,m,fx.subs(x,a),fx.subs(x,b),fx.subs(x,m),errorc])
         if errorc == 0:
                 errorc = "NA"
-        
+        tabla.add_row([i+1,a,b,m,fx.subs(x,a),fx.subs(x,b),fx.subs(x,m),errorc])
+                
         
         if fx.subs(x,m) == 0 or (b-a)/2 < error:
             break
@@ -68,10 +68,10 @@ def biseccion(a,b,error = 0.0001,max_iter= 100):
         
         
         
-    print("Numero maximo de iteraciones alcanzado")
+    print()
+    print(f"La raíz encontrada con un error menor a 0.01% es: {m}")
+    print()
     print(tabla)
     
 
 raiz = biseccion(a,b)
- 
-

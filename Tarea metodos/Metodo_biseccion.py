@@ -41,21 +41,13 @@ def biseccion(a,b,error = 0.0001,max_iter= 100):
     
     
     for i in range(max_iter):
-
-
         m_previo = m
-
         m = (a+b)/2 
         errorc = abs(((m) - m_previo)/m) *100
-
-        if errorc == 0:
-                errorc = "NA" 
-
-
- 
-
-        
         tabla.add_row([i+1,a,b,m,fx.subs(x,a),fx.subs(x,b),fx.subs(x,m),errorc])
+        if errorc == 0:
+                errorc = "NA"
+        
         
         if fx.subs(x,m) == 0 or (b-a)/2 < error:
             break
@@ -67,9 +59,6 @@ def biseccion(a,b,error = 0.0001,max_iter= 100):
             a = m
         
 
-        
-            
-        
             
         # if m_previo is not None:
         #     errorc = (((m) - m_previo)/m) *100
